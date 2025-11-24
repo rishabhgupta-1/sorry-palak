@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Palak ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Nunito:wght@400;600&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="floating-hearts-container" id="hearts-container"></div>
+    <div class="beating-heart-widget">❤️</div>
+    <iframe id="background-music" width="0" height="0"
+        src="https://www.youtube.com/embed/GIvWCOShABQ?start=89&autoplay=1&loop=1&playlist=GIvWCOShABQ" frameborder="0"
+        allow="autoplay; encrypted-media" style="display:none;"></iframe>
+
+    <!-- Screen 1: Home -->
+    <section id="home-screen" class="screen active-screen">
+        <div class="content-wrapper">
+            <h1 class="main-title">For My Dearest Palak</h1>
+            <div class="decoration-container">
+                <span class="emoji-float">❤️</span>
+                <span class="emoji-float">✨</span>
+                <span class="emoji-float">🌹</span>
+                <span class="emoji-float">🥺</span>
+            </div>
+            <p class="subtitle">I have something to say...</p>
+            <button id="start-btn" class="btn pulse-btn">Open ❤️</button>
+        </div>
+    </section>
+
+    <!-- Screen 2: Loading Quotes -->
+    <section id="loading-screen" class="screen hidden">
+        <div class="quote-container">
+            <p id="quote-text" class="fade-text">Loading...</p>
+        </div>
+    </section>
+
+    <!-- Screen 3: Apology Letter -->
+    <section id="letter-screen" class="screen hidden">
+        <div class="note-container">
+            <h2>A Note from My Heart</h2>
+            <p class="note-text">
+                "Palak, I am really sorry baba, mai sahi mai ese nhi chillana chah raha tha, I know kitna bhi gussa aaye
+                mere ko ese nahi karna chahiye tha. Itne gande tarike se chillana ya bolna nahi chahiye tha. I promise I
+                will never do this again, kitna bhi gussa aaye kuch bhi ho but ese nhi krunga. Please forgive me. Sahi m
+                mujhe itna ganda lag raha meri wajah se rona pada aur fir tumhe problem bhi hui. Mujhe smjh aagya h mai
+                hi kitna toxic hu, egoistic hu. But really I am so sorry for all this. Hamesha Taken for granted leleta
+                hu."
+            </p>
+            <div class="gallery-preview">
+                <!-- Small preview of memories -->
+                <img src="images/pic1.jpg" alt="Memory" class="mini-img">
+                <img src="images/pic3.jpg" alt="Memory" class="mini-img">
+                <img src="images/pic5.jpg" alt="Memory" class="mini-img">
+            </div>
+            <button id="read-letter-btn" class="btn">I've read it...</button>
+        </div>
+    </section>
+
+    <!-- Screen 4: Acceptance Dialog -->
+    <div id="dialog-overlay" class="overlay hidden">
+        <div class="dialog-box">
+            <h3>Please Accept My Apology 🥺</h3>
+            <div class="dialog-buttons">
+                <button id="yes-btn" class="btn btn-success">Yes, I Accept ❤️</button>
+                <button id="please-btn" class="btn btn-warning">Please please accept 🥺</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Screen 5: Final Celebration -->
+    <section id="final-screen" class="screen hidden">
+        <div class="celebration-content">
+            <div class="main-image-container">
+                <img src="images/pic2.jpg" alt="Us" class="main-pic">
+            </div>
+            <div class="poetry-container">
+                <p class="poetry">
+                    In your smile, I find my peace,<br>
+                    With your love, my worries cease.<br>
+                    I'm sorry for the tears I caused,<br>
+                    My love for you has never paused.<br>
+                    Forever yours, my heart, my soul,<br>
+                    Making you happy is my only goal. ❤️
+                </p>
+            </div>
+            <h2 class="final-msg">I Love You Palak!</h2>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
