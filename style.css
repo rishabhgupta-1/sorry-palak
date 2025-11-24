@@ -17,6 +17,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -26,6 +27,8 @@ body {
     overflow: hidden;
     height: 100vh;
     width: 100vw;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Utilities */
@@ -44,13 +47,16 @@ body {
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transform: scale(0.95);
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
     padding: 20px;
 }
 
 .active-screen {
     opacity: 1;
+    transform: scale(1);
     pointer-events: all;
     z-index: 10;
 }
@@ -72,6 +78,7 @@ body {
     font-size: 20px;
     opacity: 0.7;
     user-select: none;
+    will-change: transform;
 }
 
 /* Animations */
@@ -120,7 +127,7 @@ body {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    font-size: 4rem;
+    font-size: 3rem;
     z-index: 100;
     animation: heartBeat 1.5s infinite;
     filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.5));
@@ -153,21 +160,30 @@ body {
     background-color: var(--accent-color);
     color: var(--white);
     border: none;
-    padding: 15px 30px;
-    font-size: 1.2rem;
+    padding: 18px 40px;
+    font-size: 1.3rem;
     border-radius: 50px;
     cursor: pointer;
-    transition: transform 0.2s ease, background-color 0.3s ease;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+        background-color 0.3s ease,
+        box-shadow 0.3s ease;
     font-family: var(--font-body);
     margin-top: 20px;
-    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+    box-shadow: 0 4px 20px rgba(255, 105, 180, 0.4);
     position: relative;
     z-index: 20;
+    font-weight: 600;
+    touch-action: manipulation;
+}
+
+.btn:active {
+    transform: scale(0.95);
 }
 
 .btn:hover {
     transform: scale(1.05);
     background-color: #ff4da6;
+    box-shadow: 0 6px 25px rgba(255, 105, 180, 0.5);
 }
 
 /* Home Screen */
@@ -178,20 +194,46 @@ body {
 
 .main-title {
     font-family: var(--font-heading);
-    font-size: 4rem;
+    font-size: 3.5rem;
     color: var(--accent-color);
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    animation: fadeInDown 0.8s ease-out;
+}
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .subtitle {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: var(--text-color);
     margin-bottom: 30px;
+    animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .decoration-container {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin: 20px 0;
     height: 60px;
 }
@@ -250,49 +292,62 @@ body {
 }
 
 .quote-container {
-    max-width: 800px;
+    max-width: 90%;
     text-align: center;
     padding: 20px;
 }
 
 .fade-text {
-    font-size: 2.5rem;
-    /* Larger text */
+    font-size: 2rem;
     font-family: var(--font-heading);
     color: var(--accent-color);
     transition: opacity 0.5s ease;
     text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 /* Letter Screen */
 #letter-screen {
     background-color: var(--secondary-color);
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
     display: block;
-    padding-top: 40px;
+    padding: 20px;
 }
 
 .note-container {
     background-color: var(--white);
-    padding: 40px;
+    padding: 30px;
     border-radius: 20px;
     max-width: 800px;
     margin: 0 auto 40px auto;
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     border: 2px solid var(--primary-color);
+    animation: slideInUp 0.6s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .note-container h2 {
     font-family: var(--font-heading);
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     color: var(--accent-color);
     margin-bottom: 20px;
 }
 
 .note-text {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 1.8;
     margin-bottom: 30px;
     font-style: italic;
@@ -304,15 +359,17 @@ body {
     justify-content: center;
     gap: 15px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
 }
 
 .mini-img {
-    width: 80px;
-    height: 80px;
+    width: 70px;
+    height: 70px;
     border-radius: 10px;
     object-fit: cover;
     border: 2px solid var(--primary-color);
     transform: rotate(-5deg);
+    transition: transform 0.3s ease;
 }
 
 .mini-img:nth-child(2) {
@@ -323,6 +380,10 @@ body {
     transform: rotate(-3deg);
 }
 
+.mini-img:active {
+    transform: scale(1.1) rotate(0deg);
+}
+
 /* Dialog Overlay */
 .overlay {
     position: fixed;
@@ -330,27 +391,50 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6);
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 100;
     animation: fadeIn 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .dialog-box {
     background-color: var(--white);
-    padding: 30px;
-    border-radius: 20px;
+    padding: 35px;
+    border-radius: 25px;
     text-align: center;
     max-width: 90%;
     width: 400px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
     animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 .dialog-box h3 {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     margin-bottom: 25px;
     color: var(--text-color);
 }
@@ -401,9 +485,25 @@ body {
     text-align: center;
 }
 
+.celebration-content {
+    animation: zoomIn 0.6s ease-out;
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 .main-image-container {
-    width: 250px;
-    height: 250px;
+    width: 220px;
+    height: 220px;
     margin: 0 auto 30px auto;
     border-radius: 50%;
     overflow: hidden;
@@ -431,43 +531,106 @@ body {
 }
 
 .poetry-container {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 20px;
     border-radius: 15px;
     margin-bottom: 20px;
     display: inline-block;
+    max-width: 90%;
 }
 
 .poetry {
     font-family: var(--font-heading);
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     color: var(--text-color);
     line-height: 1.6;
 }
 
 .final-msg {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
     color: var(--accent-color);
     font-weight: bold;
     margin-top: 20px;
+    animation: pulse 2s infinite;
 }
 
-/* Responsive */
+/* Mobile Optimizations */
 @media (max-width: 768px) {
     .main-title {
-        font-size: 3rem;
+        font-size: 2.5rem;
+        line-height: 1.2;
     }
 
-    .poetry {
-        font-size: 1.4rem;
-    }
-
-    .main-image-container {
-        width: 200px;
-        height: 200px;
+    .subtitle {
+        font-size: 1.2rem;
     }
 
     .fade-text {
+        font-size: 1.6rem;
+        line-height: 1.4;
+    }
+
+    .btn {
+        padding: 16px 35px;
+        font-size: 1.2rem;
+    }
+
+    .poetry {
+        font-size: 1.3rem;
+    }
+
+    .main-image-container {
+        width: 180px;
+        height: 180px;
+    }
+
+    .note-container {
+        padding: 25px;
+    }
+
+    .note-container h2 {
         font-size: 1.8rem;
+    }
+
+    .note-text {
+        font-size: 1rem;
+    }
+
+    .beating-heart-widget {
+        font-size: 2.5rem;
+        bottom: 15px;
+        right: 15px;
+    }
+
+    .dialog-box {
+        padding: 25px;
+    }
+
+    .dialog-box h3 {
+        font-size: 1.4rem;
+    }
+
+    .final-msg {
+        font-size: 1.8rem;
+    }
+}
+
+/* Very small screens */
+@media (max-width: 380px) {
+    .main-title {
+        font-size: 2rem;
+    }
+
+    .fade-text {
+        font-size: 1.4rem;
+    }
+
+    .poetry {
+        font-size: 1.1rem;
+    }
+
+    .btn {
+        padding: 14px 30px;
+        font-size: 1.1rem;
     }
 }
