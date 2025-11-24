@@ -132,10 +132,13 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.dialogOverlay.classList.add('hidden');
         showScreen('final');
         burstHearts();
-        // Show the music iframe
-        if (elements.music) {
-            elements.music.style.display = 'block';
-        }
+        // Play music after 1 second
+        setTimeout(() => {
+            if (elements.music) {
+                elements.music.style.display = 'block';
+                elements.music.src = 'https://www.youtube.com/embed/_OkFT3UfULE?autoplay=1&loop=1&playlist=_OkFT3UfULE';
+            }
+        }, 1000);
     });
 
     buttons.please.addEventListener('click', () => {
@@ -151,10 +154,13 @@ document.addEventListener('DOMContentLoaded', () => {
             elements.dialogOverlay.classList.add('hidden');
             showScreen('final');
             burstHearts();
-            // Show the music iframe
-            if (elements.music) {
-                elements.music.style.display = 'block';
-            }
+            // Play music after 1 second
+            setTimeout(() => {
+                if (elements.music) {
+                    elements.music.style.display = 'block';
+                    elements.music.src = 'https://www.youtube.com/embed/_OkFT3UfULE?autoplay=1&loop=1&playlist=_OkFT3UfULE';
+                }
+            }, 1000);
         }, 1500);
     });
 
